@@ -24,23 +24,26 @@ class MainWindowReal : public QMainWindow
 {
     Q_OBJECT
 
+    bool bShown_ = false;
+
 public:
     explicit MainWindowReal(QWidget *parent = 0);
     ~MainWindowReal();
 
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *centralLayout;
     QTabWidget *tabWidget;
-    QWidget *tab;
-    QVBoxLayout *verticalLayout_2;
-    QTextEdit *textEdit;
-    TabFrame *frame;
-
-
     QMenuBar *menuBar;
 
     void retranslateUi();
+
+private:
+    void AddNewTab();
+
+protected:
+    void closeEvent(QCloseEvent *event);
+    void showEvent( QShowEvent* event );
 };
 
 #endif // MAINWINDOWREAL_H

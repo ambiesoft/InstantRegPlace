@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
     tabframe.cpp \
     mainwindowdummy.cpp \
-    mainwindowreal.cpp
+    mainwindowreal.cpp \
+    tabpage.cpp
 
 HEADERS += \
     tabframe.h \
     mainwindowdummy.h \
-    mainwindowreal.h
+    mainwindowreal.h \
+    tabpage.h
 
 FORMS += \
     mainwindowdummy.ui

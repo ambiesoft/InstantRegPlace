@@ -1,5 +1,5 @@
 #include "mainwindowdummy.h"
-#include "ui_mainwindow.h"
+#include "ui_mainwindowdummy.h"
 
 MainWindowDummy::MainWindowDummy(QWidget *parent) :
     QMainWindow(parent),

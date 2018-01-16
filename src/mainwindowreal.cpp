@@ -1,9 +1,9 @@
 #include "mainwindowreal.h"
+#include "tabpage.h"
 
 void MainWindowReal::retranslateUi()
 {
     this->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-    tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "1", nullptr));
 } // retranslateUi
 
 
@@ -15,31 +15,14 @@ MainWindowReal::MainWindowReal(QWidget *parent) :
     this->resize(628, 471);
     centralWidget = new QWidget(this);
     centralWidget->setObjectName(QStringLiteral("centralWidget"));
-    verticalLayout = new QVBoxLayout(centralWidget);
-    verticalLayout->setSpacing(6);
-    verticalLayout->setContentsMargins(11, 11, 11, 11);
-    verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+    centralLayout = new QVBoxLayout(centralWidget);
+    centralLayout->setSpacing(6);
+    centralLayout->setContentsMargins(11, 11, 11, 11);
+    centralLayout->setObjectName(QStringLiteral("verticalLayout"));
     tabWidget = new QTabWidget(centralWidget);
     tabWidget->setObjectName(QStringLiteral("tabWidget"));
 
-    tab = new QWidget();
-    tab->setObjectName(QStringLiteral("tab"));
-    verticalLayout_2 = new QVBoxLayout(tab);
-    verticalLayout_2->setSpacing(6);
-    verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-    verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-    textEdit = new QTextEdit(tab);
-    textEdit->setObjectName(QStringLiteral("textEdit"));
-
-    verticalLayout_2->addWidget(textEdit);
-
-    frame = new TabFrame(tab);
-
-    verticalLayout_2->addWidget(frame);
-
-    tabWidget->addTab(tab, QString());
-
-    verticalLayout->addWidget(tabWidget);
+    centralLayout->addWidget(tabWidget);
 
     this->setCentralWidget(centralWidget);
     menuBar = new QMenuBar(this);
@@ -47,13 +30,34 @@ MainWindowReal::MainWindowReal(QWidget *parent) :
     menuBar->setGeometry(QRect(0, 0, 628, 21));
     this->setMenuBar(menuBar);
 
-
-
     retranslateUi();
 
+
     QMetaObject::connectSlotsByName(this);
+
 }
 
 MainWindowReal::~MainWindowReal()
 {
 }
+void MainWindowReal::closeEvent(QCloseEvent *event)
+{
+    QMainWindow::closeEvent(event);
+}
+void MainWindowReal::showEvent( QShowEvent* event )
+{
+    QMainWindow::showEvent( event );
+
+    if(bShown_)
+        return;
+    bShown_ = true;
+
+    AddNewTab();
+}
+void MainWindowReal::AddNewTab()
+{
+    // TabPage* currentTab = tabWidget->currentWidget();
+    TabPage* newtab = new TabPage(tabWidget);
+    tabWidget->addTab(newtab, "1");
+}
+
